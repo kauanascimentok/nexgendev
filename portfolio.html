@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NexGen Dev — Portfólio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23040d13'/><text y='24' x='4' font-size='22'>⚡</text></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --neon:#00f5a0;--neon2:#00d4ff;--neon3:#7b61ff;
+  --dark:#040d13;--dark2:#071018;--dark3:#0a1a26;
+  --card:#0c1d2b;--card2:#0f2235;
+  --text:#ddeef8;--muted:#5a8099;--muted2:#3a6070;
+  --border:rgba(0,245,160,.12);--border2:rgba(0,212,255,.10);
+  --sans:'DM Sans',sans-serif;--display:'Syne',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--dark);color:var(--text);overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(0,245,160,.2);color:#fff}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:rgba(0,245,160,.3);border-radius:10px}
+
+/* cursor */
+.cursor{position:fixed;width:10px;height:10px;background:var(--neon);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .15s,height .15s}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}
+.cursor.h{width:20px;height:20px}
+.cursor-ring.h{width:54px;height:54px;border-color:var(--neon)}
+
+/* noise */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size:180px;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;
+  background:rgba(4,13,19,.85);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);transition:background .3s}
+nav.scrolled{background:rgba(4,13,19,.98)}
+.logo{font-family:var(--display);font-size:20px;font-weight:900;
+  background:linear-gradient(120deg,var(--neon),var(--neon2),var(--neon3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-decoration:none}
+.logo span{font-weight:300;opacity:.7}
+.nav-links{display:flex;gap:6px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:500;
+  padding:7px 14px;border-radius:8px;transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-links a.active{color:var(--neon)}
+.btn-cta{padding:10px 22px;background:var(--neon);color:var(--dark);border:none;
+  border-radius:9px;font-family:var(--display);font-size:13px;font-weight:700;
+  cursor:none;transition:transform .2s,box-shadow .2s}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,245,160,.35)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:140px 60px 120px;position:relative;overflow:hidden;text-align:center}
+.grid-bg{position:absolute;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(0,245,160,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,245,160,.025) 1px,transparent 1px);
+  background-size:58px 58px;animation:gridMove 28s linear infinite;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+@keyframes gridMove{from{background-position:0 0}to{background-position:58px 58px}}
+.orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(100px);z-index:0}
+.o1{width:600px;height:600px;background:rgba(0,245,160,.07);top:-150px;right:-150px;animation:of1 12s ease-in-out infinite}
+.o2{width:500px;height:500px;background:rgba(0,212,255,.06);bottom:-100px;left:-150px;animation:of2 14s ease-in-out infinite}
+.o3{width:280px;height:280px;background:rgba(123,97,255,.06);top:40%;left:20%;animation:of3 17s ease-in-out infinite}
+@keyframes of1{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,35px)}}
+@keyframes of2{0%,100%{transform:translate(0,0)}50%{transform:translate(35px,-25px)}}
+@keyframes of3{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,20px)}}
+
+.hero-z{position:relative;z-index:1;max-width:760px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px 7px 10px;
+  background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);border-radius:50px;
+  font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--neon);
+  margin-bottom:30px;animation:fup .7s .1s both}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 8px var(--neon);animation:bl 2s infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:var(--display);font-size:clamp(50px,7vw,88px);font-weight:900;
+  line-height:1.0;letter-spacing:-2.5px;margin-bottom:26px;animation:fup .7s .2s both}
+.gw{background:linear-gradient(135deg,var(--neon),var(--neon2),var(--neon3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ow{-webkit-text-stroke:2px rgba(255,255,255,.18);-webkit-text-fill-color:transparent}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.75;max-width:520px;margin:0 auto 48px;
+  font-weight:300;animation:fup .7s .3s both}
+.hero-acts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fup .7s .4s both}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;
+  background:linear-gradient(135deg,var(--neon),var(--neon2));color:var(--dark);
+  border:none;border-radius:12px;font-family:var(--display);font-size:14px;font-weight:800;
+  cursor:none;transition:transform .25s,box-shadow .25s}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(0,245,160,.35)}
+.btn-s{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;
+  background:transparent;color:var(--text);border:1.5px solid rgba(255,255,255,.12);
+  border-radius:12px;font-family:var(--display);font-size:14px;font-weight:700;
+  cursor:none;transition:border-color .25s,color .25s}
+.btn-s:hover{border-color:var(--neon2);color:var(--neon2)}
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:11px;color:var(--muted2);letter-spacing:1.5px;text-transform:uppercase;
+  animation:fup .7s .8s both}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--neon),transparent);animation:sl 2s ease-in-out infinite}
+@keyframes sl{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.3}}
+
+/* FILTER BAR */
+#projetos{padding:100px 60px}
+.filter-bar{display:flex;gap:10px;margin-bottom:60px;flex-wrap:wrap;justify-content:center}
+.filter-btn{padding:9px 22px;border-radius:50px;font-family:var(--sans);font-size:13px;
+  font-weight:600;cursor:none;transition:all .25s;letter-spacing:.3px;border:1.5px solid var(--border)}
+.filter-btn.active,.filter-btn:hover{background:rgba(0,245,160,.1);border-color:rgba(0,245,160,.4);color:var(--neon)}
+.filter-btn{background:transparent;color:var(--muted)}
+
+/* PROJECTS GRID */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:20px;
+  overflow:hidden;transition:transform .35s cubic-bezier(.22,.68,0,1.1),border-color .3s,box-shadow .3s;
+  cursor:none;position:relative}
+.proj-card:hover{transform:translateY(-8px);border-color:rgba(0,245,160,.3);box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.proj-card.hidden{display:none}
+
+/* Project visual area — each unique */
+.proj-thumb{height:220px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+
+/* Projeto 1 — Restaurante */
+.thumb-restaurante{background:linear-gradient(135deg,#1a0a05,#2d1408)}
+.thumb-restaurante .scene{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.plate{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,#2a1508,#1a0905);
+  border:2px solid rgba(255,150,50,.3);position:relative;z-index:2;
+  box-shadow:0 0 40px rgba(255,100,20,.15)}
+.plate::after{content:'🍽️';font-size:36px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.food-glow{position:absolute;width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,120,30,.15),transparent 70%);animation:pulse2 3s ease-in-out infinite}
+@keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.rest-lines{position:absolute;bottom:16px;left:20px;right:20px}
+.rl{height:2px;background:rgba(255,150,50,.15);border-radius:2px;margin-bottom:6px}
+.rl:nth-child(2){width:70%}
+.rest-tag{position:absolute;top:16px;right:16px;background:rgba(255,120,30,.2);
+  border:1px solid rgba(255,120,30,.3);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:#ff9050;font-weight:600}
+
+/* Projeto 2 — Salão */
+.thumb-salao{background:linear-gradient(135deg,#0d0a1a,#1a1030)}
+.scissor-scene{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative}
+.big-icon{font-size:64px;position:relative;z-index:2;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.glow-ring{position:absolute;width:120px;height:120px;border-radius:50%;
+  border:1.5px solid rgba(180,100,255,.25);animation:spin 8s linear infinite}
+.glow-ring2{position:absolute;width:160px;height:160px;border-radius:50%;
+  border:1px dashed rgba(180,100,255,.15);animation:spin 14s linear infinite reverse}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.salon-tag{position:absolute;top:16px;right:16px;background:rgba(123,61,255,.2);
+  border:1px solid rgba(123,61,255,.35);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:#a47fff;font-weight:600}
+
+/* Projeto 3 — Academia */
+.thumb-academia{background:linear-gradient(135deg,#050f1a,#0a1c0d)}
+.gym-scene{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative}
+.bar{width:130px;height:14px;background:linear-gradient(90deg,#1a2a1a,#2a4a2a);
+  border-radius:7px;position:relative;z-index:2}
+.bar::before,.bar::after{content:'';position:absolute;top:-18px;width:32px;height:50px;
+  background:linear-gradient(180deg,#1e3a1e,#2a4a2a);border-radius:6px;border:1px solid rgba(0,245,160,.2)}
+.bar::before{left:-10px}.bar::after{right:-10px}
+.bar-glow{position:absolute;inset:0;background:rgba(0,245,160,.05);border-radius:50%;
+  width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(30px)}
+.gym-tag{position:absolute;top:16px;right:16px;background:rgba(0,245,160,.1);
+  border:1px solid rgba(0,245,160,.25);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:var(--neon);font-weight:600}
+
+/* Projeto 4 — Pet Shop */
+.thumb-pet{background:linear-gradient(135deg,#051215,#0a2020)}
+.pet-scene{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative}
+.pet-icon{font-size:60px;z-index:2;position:relative;animation:float 3.5s ease-in-out infinite}
+.paw-trail{position:absolute;font-size:16px;opacity:.25}
+.p1{top:20px;left:30px}.p2{top:40px;right:40px}.p3{bottom:30px;left:50px}.p4{bottom:20px;right:30px}
+.pet-tag{position:absolute;top:16px;right:16px;background:rgba(0,212,255,.1);
+  border:1px solid rgba(0,212,255,.25);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:var(--neon2);font-weight:600}
+
+/* Projeto 5 — Landing SaaS */
+.thumb-saas{background:linear-gradient(135deg,#060812,#0c0f28)}
+.saas-scene{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative}
+.dash-mock{width:160px;background:#0d1530;border:1px solid rgba(123,97,255,.3);
+  border-radius:10px;padding:12px;position:relative;z-index:2}
+.dm-bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#7b61ff,#00d4ff);margin-bottom:7px}
+.dm-row{display:flex;gap:6px;margin-bottom:6px}
+.dm-block{height:24px;flex:1;border-radius:5px;background:rgba(123,97,255,.15)}
+.dm-block:first-child{flex:2}
+.dm-line{height:3px;border-radius:2px;background:rgba(255,255,255,.07);margin-bottom:4px;width:80%}
+.dm-line:last-child{width:55%}
+.saas-glow{position:absolute;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(123,97,255,.12),transparent 70%);filter:blur(20px)}
+.saas-tag{position:absolute;top:16px;right:16px;background:rgba(123,97,255,.15);
+  border:1px solid rgba(123,97,255,.3);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:#a47fff;font-weight:600}
+
+/* Projeto 6 — E-commerce Moda */
+.thumb-moda{background:linear-gradient(135deg,#130a10,#200f1a)}
+.moda-scene{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative}
+.card-mock{width:80px;background:#1a0d15;border:1px solid rgba(255,100,180,.2);
+  border-radius:10px;padding:10px 8px;position:relative;z-index:2;transition:transform .3s}
+.cm-img{height:50px;background:linear-gradient(135deg,rgba(255,100,180,.15),rgba(255,150,200,.08));
+  border-radius:6px;margin-bottom:7px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.cm-line{height:3px;border-radius:2px;background:rgba(255,100,180,.15);margin-bottom:4px}
+.cm-price{font-size:10px;color:rgba(255,150,200,.6);font-weight:600;margin-top:6px}
+.card-mock2{width:80px;background:#1a0d15;border:1px solid rgba(255,100,180,.15);
+  border-radius:10px;padding:10px 8px;margin-left:-20px;position:relative;z-index:1}
+.moda-tag{position:absolute;top:16px;right:16px;background:rgba(255,80,160,.1);
+  border:1px solid rgba(255,80,160,.25);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:#ff80c0;font-weight:600}
+
+/* Projeto 7 — Banner */
+.thumb-banner{background:linear-gradient(135deg,#050d0a,#08180f)}
+.banner-scene{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.banner-mock{width:200px;height:110px;background:var(--card2);border:1px solid rgba(0,245,160,.2);
+  border-radius:10px;position:relative;overflow:hidden;z-index:2}
+.bm-top{height:40px;background:linear-gradient(90deg,rgba(0,245,160,.15),rgba(0,212,255,.1));
+  display:flex;align-items:center;padding:0 12px;gap:8px}
+.bm-dot{width:8px;height:8px;border-radius:50%}
+.bm-body{padding:10px 12px}
+.bm-h{height:8px;width:70%;border-radius:4px;background:rgba(255,255,255,.15);margin-bottom:6px}
+.bm-t{height:5px;width:50%;border-radius:3px;background:rgba(255,255,255,.07);margin-bottom:4px}
+.bm-btn{width:50px;height:14px;border-radius:4px;background:rgba(0,245,160,.25);margin-top:8px}
+.banner-tag{position:absolute;top:16px;right:16px;background:rgba(0,245,160,.1);
+  border:1px solid rgba(0,245,160,.25);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:var(--neon);font-weight:600}
+
+/* Projeto 8 — Clínica */
+.thumb-clinica{background:linear-gradient(135deg,#04100f,#081c1a)}
+.clinic-scene{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative}
+.cross-icon{font-size:56px;z-index:2;position:relative}
+.cross-ring{position:absolute;width:110px;height:110px;border-radius:50%;
+  border:1.5px solid rgba(0,245,160,.2);animation:pulse3 3s ease-in-out infinite}
+.cross-ring2{position:absolute;width:150px;height:150px;border-radius:50%;
+  border:1px dashed rgba(0,212,255,.1);animation:pulse3 4s ease-in-out infinite reverse}
+@keyframes pulse3{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.08);opacity:.4}}
+.clinic-tag{position:absolute;top:16px;right:16px;background:rgba(0,212,255,.1);
+  border:1px solid rgba(0,212,255,.25);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:var(--neon2);font-weight:600}
+
+/* Projeto 9 — Sistema */
+.thumb-sistema{background:linear-gradient(135deg,#050a14,#080e20)}
+.sys-scene{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative}
+.terminal{width:170px;background:#0a1525;border:1px solid rgba(0,245,160,.2);
+  border-radius:10px;overflow:hidden;position:relative;z-index:2}
+.term-bar{height:28px;background:#0d1c30;display:flex;align-items:center;padding:0 10px;gap:5px}
+.tb{width:8px;height:8px;border-radius:50%}
+.term-body{padding:10px 12px;font-family:monospace;font-size:10px;color:rgba(0,245,160,.7);line-height:1.6}
+.tl{margin-bottom:2px}
+.tl .p{color:rgba(0,212,255,.8)}
+.tl .c{color:rgba(255,255,255,.3)}
+.sys-tag{position:absolute;top:16px;right:16px;background:rgba(0,245,160,.1);
+  border:1px solid rgba(0,245,160,.25);border-radius:8px;padding:5px 10px;
+  font-size:11px;color:var(--neon);font-weight:600}
+
+/* Card info */
+.proj-info{padding:24px 26px}
+.proj-cats{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.pcat{font-size:11px;font-weight:600;padding:4px 11px;border-radius:50px;letter-spacing:.3px}
+.pcat.g{background:rgba(0,245,160,.08);color:var(--neon);border:1px solid rgba(0,245,160,.18)}
+.pcat.b{background:rgba(0,212,255,.08);color:var(--neon2);border:1px solid rgba(0,212,255,.18)}
+.pcat.p{background:rgba(123,97,255,.1);color:#a47fff;border:1px solid rgba(123,97,255,.2)}
+.pcat.k{background:rgba(255,80,160,.08);color:#ff80c0;border:1px solid rgba(255,80,160,.18)}
+.proj-title{font-family:var(--display);font-size:18px;font-weight:800;margin-bottom:8px;line-height:1.2}
+.proj-desc{font-size:13.5px;color:var(--muted);line-height:1.7;font-weight:300}
+.proj-footer{display:flex;align-items:center;justify-content:space-between;margin-top:18px;
+  padding-top:18px;border-top:1px solid var(--border)}
+.proj-tools{display:flex;gap:6px;flex-wrap:wrap}
+.ptool{font-size:11px;color:var(--muted2);background:rgba(255,255,255,.04);
+  padding:4px 10px;border-radius:5px;border:1px solid rgba(255,255,255,.06);font-weight:500}
+.proj-link{display:flex;align-items:center;gap:6px;color:var(--neon);font-size:13px;
+  font-weight:600;text-decoration:none;transition:gap .2s;white-space:nowrap}
+.proj-link:hover{gap:10px}
+
+/* DESTAQUE full-width */
+.proj-card.destaque{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0}
+.proj-card.destaque .proj-thumb{height:100%;min-height:280px;border-radius:20px 0 0 20px}
+.proj-card.destaque .proj-info{padding:40px}
+.proj-card.destaque .proj-title{font-size:26px}
+.proj-card.destaque .proj-desc{font-size:14.5px}
+
+/* CTA section */
+#cta{padding:80px 60px;text-align:center;position:relative}
+.cta-box{background:var(--card2);border:1px solid rgba(0,245,160,.2);
+  border-radius:24px;padding:80px 60px;position:relative;overflow:hidden}
+.cta-orb{position:absolute;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,245,160,.08),transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-box h2{font-family:var(--display);font-size:clamp(32px,4vw,56px);font-weight:900;
+  letter-spacing:-1.5px;margin-bottom:18px;position:relative;z-index:1}
+.cta-box p{font-size:16px;color:var(--muted);line-height:1.7;max-width:500px;
+  margin:0 auto 40px;font-weight:300;position:relative;z-index:1}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid var(--border);
+  padding:32px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:13px;color:var(--muted2)}
+.footer-copy span{color:var(--neon)}
+.back-home{display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;
+  font-size:13px;font-weight:500;transition:color .2s}
+.back-home:hover{color:var(--neon)}
+
+/* animations */
+@keyframes fup{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .proj-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-card.destaque{grid-column:auto;display:block}
+  .proj-card.destaque .proj-thumb{height:220px;border-radius:20px 20px 0 0;min-height:0}
+}
+@media(max-width:640px){
+  nav{padding:0 18px}.nav-links{display:none}
+  #hero,#projetos,#cta{padding-left:18px;padding-right:18px}
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card.destaque .proj-info{padding:24px}
+  footer{padding:28px 18px}
+  .cta-box{padding:48px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cr"></div>
+<div class="cursor-ring" id="crr"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="logo">Nex<span>Gen</span> Dev</a>
+  <ul class="nav-links">
+    <li><a href="#projetos" class="active">Portfólio</a></li>
+    <li><a href="index.html#servicos">Serviços</a></li>
+    <li><a href="index.html#sobre">Sobre</a></li>
+    <li><a href="index.html#precos">Preços</a></li>
+  </ul>
+  <button class="btn-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+    Quero um projeto assim
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="hero-z">
+    <div class="hero-badge"><span class="bdot"></span>Projetos conceituais & estudos de caso</div>
+    <h1>Nosso <span class="gw">Portfólio</span><br>de <span class="ow">Trabalhos</span></h1>
+    <p class="hero-sub">
+      Estamos começando nossa jornada — estes são projetos conceituais que demonstram nossa capacidade criativa e técnica. <strong>Seu projeto pode ser o primeiro caso real aqui!</strong>
+    </p>
+    <div class="hero-acts">
+      <button class="btn-p" onclick="document.getElementById('projetos').scrollIntoView({behavior:'smooth'})">
+        Ver projetos <span>→</span>
+      </button>
+      <button class="btn-s" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+        Ser nosso primeiro cliente
+      </button>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div style="max-width:1200px;margin:0 auto">
+
+    <div class="section-header reveal" style="text-align:center;margin-bottom:48px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:12px">Estudos de Caso</div>
+      <h2 style="font-family:var(--display);font-size:clamp(30px,4vw,50px);font-weight:900;letter-spacing:-1.5px">
+        9 projetos, <span style="background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">9 soluções</span>
+      </h2>
+      <p style="font-size:15px;color:var(--muted);margin-top:14px;font-weight:300">Cada projeto foi desenvolvido com atenção total ao design e à experiência do usuário.</p>
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-cat="all">Todos</button>
+      <button class="filter-btn" data-cat="site">Sites</button>
+      <button class="filter-btn" data-cat="design">Design</button>
+      <button class="filter-btn" data-cat="banner">Banners</button>
+      <button class="filter-btn" data-cat="sistema">Sistemas</button>
+      <button class="filter-btn" data-cat="ecommerce">E-commerce</button>
+    </div>
+
+    <!-- GRID -->
+    <div class="proj-grid" id="grid">
+
+      <!-- 1 — Restaurante DESTAQUE -->
+      <div class="proj-card destaque reveal" data-cats="site design">
+        <div class="proj-thumb thumb-restaurante">
+          <div class="scene">
+            <div class="food-glow"></div>
+            <div class="plate"></div>
+            <div class="rest-lines"><div class="rl"></div><div class="rl"></div></div>
+          </div>
+          <span class="rest-tag">Site + Design</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats">
+            <span class="pcat g">Site</span>
+            <span class="pcat b">UI Design</span>
+            <span class="pcat p">Branding</span>
+          </div>
+          <div class="proj-title">Sabor & Arte — Restaurante Gourmet</div>
+          <p class="proj-desc">Site completo para restaurante gourmet com cardápio interativo, galeria de pratos e sistema de reservas online. Design sofisticado que transmite a elegância da culinária fine dining e converte visitantes em clientes.</p>
+          <div style="margin-top:16px;display:flex;gap:24px">
+            <div><div style="font-family:var(--display);font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">+40%</div><div style="font-size:12px;color:var(--muted)">Reservas estimadas</div></div>
+            <div><div style="font-family:var(--display);font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">7 dias</div><div style="font-size:12px;color:var(--muted)">Prazo de entrega</div></div>
+            <div><div style="font-family:var(--display);font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">98</div><div style="font-size:12px;color:var(--muted)">Score PageSpeed</div></div>
+          </div>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">React</span><span class="ptool">Figma</span><span class="ptool">Node.js</span><span class="ptool">Animate.css</span></div>
+            <a href="#cta" class="proj-link">Ver detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 — Salão -->
+      <div class="proj-card reveal" data-cats="site design">
+        <div class="proj-thumb thumb-salao">
+          <div class="scissor-scene">
+            <div class="glow-ring"></div>
+            <div class="glow-ring2"></div>
+            <div class="big-icon">✂️</div>
+          </div>
+          <span class="salon-tag">Site + Agendamento</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats"><span class="pcat p">Site</span><span class="pcat b">UI Design</span></div>
+          <div class="proj-title">Glam Studio — Salão de Beleza</div>
+          <p class="proj-desc">Site moderno com agendamento online integrado, galeria de trabalhos e perfil de cada profissional. Visual luxuoso que atrai e retém clientes.</p>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">WordPress</span><span class="ptool">CSS3</span><span class="ptool">Figma</span></div>
+            <a href="#cta" class="proj-link">Detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 — Academia -->
+      <div class="proj-card reveal" data-cats="site design">
+        <div class="proj-thumb thumb-academia">
+          <div class="gym-scene">
+            <div class="bar-glow"></div>
+            <div class="bar"></div>
+          </div>
+          <span class="gym-tag">Site + Landing Page</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats"><span class="pcat g">Site</span><span class="pcat b">Landing Page</span></div>
+          <div class="proj-title">IronFit — Academia & CrossFit</div>
+          <p class="proj-desc">Site energético para academia com apresentação de planos, horários de aulas, equipe de professores e formulário de matrícula otimizado para conversão.</p>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">Next.js</span><span class="ptool">Tailwind</span><span class="ptool">Figma</span></div>
+            <a href="#cta" class="proj-link">Detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 — Pet Shop -->
+      <div class="proj-card reveal" data-cats="site ecommerce">
+        <div class="proj-thumb thumb-pet">
+          <div class="pet-scene">
+            <span class="paw-trail p1">🐾</span>
+            <span class="paw-trail p2">🐾</span>
+            <span class="paw-trail p3">🐾</span>
+            <span class="paw-trail p4">🐾</span>
+            <div class="big-icon">🐶</div>
+          </div>
+          <span class="pet-tag">E-commerce</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats"><span class="pcat b">E-commerce</span><span class="pcat g">Site</span></div>
+          <div class="proj-title">PetLove Shop — Pet Shop Online</div>
+          <p class="proj-desc">Loja virtual completa para pet shop com catálogo de produtos, sistema de agendamento de banho & tosa e blog de dicas para tutores de pets.</p>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">WooCommerce</span><span class="ptool">WordPress</span></div>
+            <a href="#cta" class="proj-link">Detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 — SaaS -->
+      <div class="proj-card reveal" data-cats="site design sistema">
+        <div class="proj-thumb thumb-saas">
+          <div class="saas-scene">
+            <div class="saas-glow"></div>
+            <div class="dash-mock">
+              <div class="dm-bar"></div>
+              <div class="dm-row"><div class="dm-block"></div><div class="dm-block"></div></div>
+              <div class="dm-line"></div><div class="dm-line"></div><div class="dm-line"></div>
+            </div>
+          </div>
+          <span class="saas-tag">Dashboard + SaaS</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats"><span class="pcat p">Dashboard</span><span class="pcat b">UI Design</span></div>
+          <div class="proj-title">Flowdesk — Plataforma SaaS</div>
+          <p class="proj-desc">Landing page e dashboard para startup de gestão de tarefas. Design clean, animações suaves e interface intuitiva que demonstra o valor do produto instantaneamente.</p>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">React</span><span class="ptool">Framer Motion</span><span class="ptool">Figma</span></div>
+            <a href="#cta" class="proj-link">Detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 — Moda -->
+      <div class="proj-card reveal" data-cats="site ecommerce design">
+        <div class="proj-thumb thumb-moda">
+          <div class="moda-scene">
+            <div class="card-mock">
+              <div class="cm-img">👗</div>
+              <div class="cm-line"></div><div class="cm-line" style="width:60%"></div>
+              <div class="cm-price">R$ 189</div>
+            </div>
+            <div class="card-mock2">
+              <div class="cm-img" style="font-size:20px">👠</div>
+              <div class="cm-line"></div><div class="cm-line" style="width:55%"></div>
+              <div class="cm-price">R$ 249</div>
+            </div>
+          </div>
+          <span class="moda-tag">E-commerce</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats"><span class="pcat k">E-commerce</span><span class="pcat p">Design</span></div>
+          <div class="proj-title">Atelier Maya — Moda Feminina</div>
+          <p class="proj-desc">Loja virtual de moda com experiência de compra premium, lookbook interativo, vitrine por coleção e checkout otimizado para conversão máxima.</p>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">Shopify</span><span class="ptool">Liquid</span><span class="ptool">Figma</span></div>
+            <a href="#cta" class="proj-link">Detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 — Banner -->
+      <div class="proj-card reveal" data-cats="banner design">
+        <div class="proj-thumb thumb-banner">
+          <div class="banner-scene">
+            <div class="banner-mock">
+              <div class="bm-top">
+                <div class="bm-dot" style="background:#ff5f5f"></div>
+                <div class="bm-dot" style="background:#ffbd2e"></div>
+                <div class="bm-dot" style="background:#28c840"></div>
+              </div>
+              <div class="bm-body">
+                <div class="bm-h"></div>
+                <div class="bm-t"></div><div class="bm-t" style="width:38%"></div>
+                <div class="bm-btn"></div>
+              </div>
+            </div>
+          </div>
+          <span class="banner-tag">Pack de Banners</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats"><span class="pcat g">Banners</span><span class="pcat b">Social Media</span></div>
+          <div class="proj-title">TechStore — Campanha Digital</div>
+          <p class="proj-desc">Pack completo com 20 banners em diferentes formatos para loja de tecnologia: feed do Instagram, Stories, Google Display e e-mail marketing.</p>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">Photoshop</span><span class="ptool">Illustrator</span></div>
+            <a href="#cta" class="proj-link">Detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 — Clínica -->
+      <div class="proj-card reveal" data-cats="site design">
+        <div class="proj-thumb thumb-clinica">
+          <div class="clinic-scene">
+            <div class="cross-ring"></div>
+            <div class="cross-ring2"></div>
+            <div class="cross-icon">🏥</div>
+          </div>
+          <span class="clinic-tag">Site Institucional</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats"><span class="pcat b">Site</span><span class="pcat g">UI Design</span></div>
+          <div class="proj-title">Clínica Vida Plena — Saúde</div>
+          <p class="proj-desc">Site institucional para clínica médica com especialidades, equipe médica, agendamento online e integração com sistemas de telemedicina.</p>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">React</span><span class="ptool">Node.js</span><span class="ptool">Figma</span></div>
+            <a href="#cta" class="proj-link">Detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 — Sistema -->
+      <div class="proj-card reveal" data-cats="sistema design">
+        <div class="proj-thumb thumb-sistema">
+          <div class="sys-scene">
+            <div class="terminal">
+              <div class="term-bar">
+                <div class="tb" style="background:#ff5f5f"></div>
+                <div class="tb" style="background:#ffbd2e"></div>
+                <div class="tb" style="background:#28c840"></div>
+              </div>
+              <div class="term-body">
+                <div class="tl"><span class="p">$ </span><span>npm start</span></div>
+                <div class="tl"><span class="c">✓ Server running</span></div>
+                <div class="tl"><span class="p">$ </span><span>deploy --prod</span></div>
+                <div class="tl"><span class="c">✓ Build success</span></div>
+                <div class="tl"><span class="p">▋</span></div>
+              </div>
+            </div>
+          </div>
+          <span class="sys-tag">Sistema Web</span>
+        </div>
+        <div class="proj-info">
+          <div class="proj-cats"><span class="pcat g">Sistema</span><span class="pcat p">Dashboard</span></div>
+          <div class="proj-title">EasyStock — Gestão de Estoque</div>
+          <p class="proj-desc">Sistema web de gestão de estoque para pequenas empresas com dashboard em tempo real, controle de entradas/saídas, relatórios e alertas automáticos.</p>
+          <div class="proj-footer">
+            <div class="proj-tools"><span class="ptool">React</span><span class="ptool">Node.js</span><span class="ptool">MySQL</span></div>
+            <a href="#cta" class="proj-link">Detalhes <span>→</span></a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-box reveal">
+    <div class="cta-orb"></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:16px;position:relative;z-index:1">Próxima oportunidade</div>
+    <h2>Seu projeto pode ser<br><span style="background:linear-gradient(135deg,var(--neon),var(--neon2),var(--neon3));-webkit-background-clip:text;-webkit-text-fill-color:transparent">o próximo destaque</span> aqui</h2>
+    <p>Estamos prontos para colocar toda nossa energia no seu projeto. Orçamento grátis, sem compromisso — resposta em até 24 horas.</p>
+    <div class="cta-btns">
+      <a href="index.html#contato" class="btn-p" style="text-decoration:none">
+        Solicitar orçamento grátis <span>→</span>
+      </a>
+      <a href="https://wa.me/5592999999999" class="btn-s" style="text-decoration:none">
+        💬 Chamar no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 <span>NexGen Dev</span> — Portfólio</div>
+  <a href="index.html" class="back-home">← Voltar ao site principal</a>
+</footer>
+
+<script>
+// Cursor
+const cr=document.getElementById('cr'),crr=document.getElementById('crr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cr.style.left=mx+'px';cr.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;crr.style.left=rx+'px';crr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.proj-card,.filter-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cr.classList.add('h');crr.classList.add('h')});
+  el.addEventListener('mouseleave',()=>{cr.classList.remove('h');crr.classList.remove('h')});
+});
+
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>50);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
+});
+
+// Reveal
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// Filter
+const filterBtns=document.querySelectorAll('.filter-btn');
+const cards=document.querySelectorAll('.proj-card');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat=btn.dataset.cat;
+    cards.forEach(card=>{
+      const cats=(card.dataset.cats||'').split(' ');
+      const show=cat==='all'||cats.includes(cat);
+      card.style.opacity=show?'1':'0.15';
+      card.style.transform=show?'':'scale(0.96)';
+      card.style.pointerEvents=show?'auto':'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
